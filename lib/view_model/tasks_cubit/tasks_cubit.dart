@@ -48,8 +48,12 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   void addtask(Task task) {
-    Task.tasks.add(task);
-    print(Task.tasks.last.date);
+    Task.tasks.insert(0, task);
+    taskNameController.clear();
+    dateController.clear();
+    timeStartController.clear();
+    timeEndController.clear();
+    taskDescriptionController.clear();
     emit(TaskAddedState());
   }
 }

@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_task/core/constants/app_colors.dart';
 import 'package:todo_task/core/models/filter_model.dart';
+import 'package:todo_task/core/widgets/custom_elevated_button.dart';
 import 'package:todo_task/model/task.dart';
 import 'package:todo_task/core/utils/size_config.dart';
 import 'package:todo_task/core/widgets/custom_snackbar.dart';
 import 'package:todo_task/core/widgets/filters%20widget/filter_listview.dart';
 import 'package:todo_task/core/widgets/space.dart';
 import 'package:todo_task/core/widgets/widget_with_padding.dart';
+import 'package:todo_task/view/widgets/add_task_widget/custom_app_bar.dart';
 import 'package:todo_task/view/widgets/add_task_widget/title_with_text_form_field.dart';
 import 'package:todo_task/view_model/tasks_cubit/tasks_cubit.dart';
 import 'package:todo_task/view_model/tasks_cubit/tasks_state.dart';
@@ -139,15 +141,17 @@ class AddTaskScreen extends StatelessWidget {
           child: CircleAvatar(
             maxRadius: SizeConfig.defaultSize! * 2.7,
             backgroundColor: AppColors.mainColor,
-            child: IconButton(
-              onPressed: () {
-                _showDatePicker(context, cubit);
-              },
-              icon: Icon(
-                Icons.date_range_rounded,
-                size: SizeConfig.defaultSize! * 3.7,
+            child: Center(
+              child: IconButton(
+                onPressed: () {
+                  _showDatePicker(context, cubit);
+                },
+                icon: Icon(
+                  Icons.date_range_rounded,
+                ),
+                color: Colors.white,
+                iconSize: SizeConfig.defaultSize! * 3.7,
               ),
-              color: Colors.white,
             ),
           ),
         )
@@ -190,64 +194,6 @@ class AddTaskScreen extends StatelessWidget {
           size: SizeConfig.defaultSize! * 5,
         )
       ],
-    );
-  }
-}
-
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({Key? key, this.height}) : super(key: key);
-  final double? height;
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      actions: [
-        WidgetWithPadding(
-            verticalSpace: 0,
-            widget: Icon(
-              Icons.notes,
-              size: SizeConfig.defaultSize! * 4,
-              color: Colors.black,
-            ))
-      ],
-      leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black,
-          )),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height ?? SizeConfig.defaultSize! * 7);
-}
-
-class CustomElevatedButton extends StatelessWidget {
-  const CustomElevatedButton({
-    Key? key,
-    required this.onPressed,
-    required this.title,
-    this.paddingEdgeInsets,
-  }) : super(key: key);
-  final VoidCallback onPressed;
-  final String title;
-  final EdgeInsets? paddingEdgeInsets;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: SizeConfig.screenWidth,
-      padding: paddingEdgeInsets ?? EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 5, vertical: SizeConfig.defaultSize! * 2),
-      child: ElevatedButton(
-          style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 9), primary: AppColors.mainColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
-          onPressed: onPressed,
-          child: Text(
-            title,
-            style: TextStyle(fontSize: SizeConfig.defaultSize! * 2.5),
-          )),
     );
   }
 }
