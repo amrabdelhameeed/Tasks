@@ -24,7 +24,6 @@ class TitleWithTextFormField extends StatelessWidget {
             onTap: onTap ?? () {},
             child: TextFormField(
               style: AppStyles.w600TextStyleBlack,
-
               enabled: onTap == null, //onTap ==null => that means there is no picker (date or time) and it is a normal text form field and can be edited
               controller: controller,
               // isTime ==true => there is suffix Icon otherwise there is not

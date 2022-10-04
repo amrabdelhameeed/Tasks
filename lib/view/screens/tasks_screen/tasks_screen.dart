@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo_task/core/constants/app_colors.dart';
-import 'package:todo_task/core/utils/size_config.dart';
-import 'package:todo_task/view/methods/tasks_screen_methods/background_custom_painter_with_its_widget.dart';
-import 'package:todo_task/view/methods/tasks_screen_methods/tasks_listview_with_scroll_bar.dart';
+import 'package:intl/intl.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/utils/app_controllers.dart';
+import '../../../core/utils/size_config.dart';
+import '../../methods/tasks_screen_methods/background_custom_painter_with_its_widget.dart';
+import '../../methods/tasks_screen_methods/tasks_listview_with_scroll_bar.dart';
 
 class TasksScreen extends StatelessWidget {
-  TasksScreen({Key? key}) : super(key: key);
-  final ScrollController scrollController = ScrollController();
+  const TasksScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -15,8 +16,8 @@ class TasksScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            backgroundCustomPainterAndItsWidgets(context),
-            tasksListViewWithScrollBar(scrollController: scrollController),
+            const BackgroundCustomPainterAndItsWidgets(),
+            TasksListViewWithScrollBar(scrollController: AppControllers.scrollController),
           ],
         ),
       ),

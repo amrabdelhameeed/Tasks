@@ -1,8 +1,8 @@
 class FilterModel {
   final String filterName;
   bool isSelected;
-
-  FilterModel({required this.filterName, this.isSelected = false});
+  final int index;
+  FilterModel({required this.filterName, this.isSelected = false, required this.index});
   void selectFilter() {
     isSelected = true;
   }
@@ -12,12 +12,10 @@ class FilterModel {
   }
 
   static List<FilterModel> filters = [
-    FilterModel(filterName: 'Development', isSelected: true),
-    FilterModel(
-      filterName: 'Research',
-    ),
-    FilterModel(filterName: 'Design'),
-    FilterModel(filterName: 'BackEnd'),
-    FilterModel(filterName: 'Testing'),
+    FilterModel(filterName: 'Studying', isSelected: true, index: 0),
+    FilterModel(filterName: 'Sports', index: 1),
+    FilterModel(filterName: 'Work', index: 2),
+    FilterModel(filterName: 'To-Do', index: 3),
+    FilterModel(filterName: 'Other', index: 4),
   ];
 }

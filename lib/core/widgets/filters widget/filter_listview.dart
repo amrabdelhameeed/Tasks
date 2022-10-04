@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/filter_model.dart';
-import '../../utils/size_config.dart';
+
 import '../../../view_model/tasks_cubit/tasks_cubit.dart';
 import '../../../view_model/tasks_cubit/tasks_state.dart';
+import '../../models/filter_model.dart';
+import '../../utils/size_config.dart';
 import 'filter_list_item.dart';
 
 class FilterListView extends StatelessWidget {

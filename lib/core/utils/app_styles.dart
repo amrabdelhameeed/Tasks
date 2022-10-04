@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'size_config.dart';
 
 import '../constants/app_colors.dart';
+import 'size_config.dart';
 
 class AppStyles {
   AppStyles._();

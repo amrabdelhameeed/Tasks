@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_task/core/utils/size_config.dart';
-import 'package:todo_task/core/widgets/widget_with_padding.dart';
+import '../../../core/utils/size_config.dart';
+import '../../../core/widgets/widget_with_padding.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({Key? key, this.height}) : super(key: key);

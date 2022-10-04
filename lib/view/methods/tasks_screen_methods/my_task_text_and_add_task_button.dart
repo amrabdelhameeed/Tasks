@@ -2,19 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_task/core/constants/app_routes.dart';
-import 'package:todo_task/core/packages/DatePickerTimelineFlutter-master/lib/date_picker_timeline.dart';
-import 'package:todo_task/core/packages/DatePickerTimelineFlutter-master/lib/extra/color.dart';
-import 'package:todo_task/core/utils/size_config.dart';
-import 'package:todo_task/view_model/tasks_cubit/tasks_cubit.dart';
-import 'package:todo_task/view_model/tasks_cubit/tasks_state.dart';
+import '../../../core/constants/app_routes.dart';
+import '../../../core/packages/DatePickerTimelineFlutter-master/lib/date_picker_timeline.dart';
+import '../../../core/packages/DatePickerTimelineFlutter-master/lib/extra/color.dart';
+import '../../../core/utils/size_config.dart';
+import '../../../view_model/tasks_cubit/tasks_cubit.dart';
+import '../../../view_model/tasks_cubit/tasks_state.dart';
 
-Positioned dateTimeLinePickerAndAddButtonWithTexts(BuildContext context) {
-  return Positioned(
-    width: SizeConfig.screenWidth!,
-    height: SizeConfig.defaultSize! * 19,
-    top: SizeConfig.defaultSize! * 14,
-    child: Container(
+class DateTimeLinePickerAndAddButtonWithTexts extends StatelessWidget {
+  const DateTimeLinePickerAndAddButtonWithTexts({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      width: SizeConfig.screenWidth!,
+      height: SizeConfig.defaultSize! * 19,
+      top: SizeConfig.defaultSize! * 14,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -26,8 +29,8 @@ Positioned dateTimeLinePickerAndAddButtonWithTexts(BuildContext context) {
           _dateTimeLinePicker()
         ],
       ),
-    ),
-  );
+    );
+  }
 }
 
 Widget _dateTimeLinePicker() {
@@ -41,8 +44,9 @@ Widget _dateTimeLinePicker() {
           children: [
             // note : i had to manually customize the DatePickerTimeLine package to get the design
             DatePicker(
-              DateTime.now(),
+              DateTime.now().subtract(const Duration(days: 15)),
               initialSelectedDate: DateTime.now(),
+              daysCount: 60,
               height: SizeConfig.defaultSize! * 8,
               width: SizeConfig.defaultSize! * 7.5,
               selectionColor: AppColors.mainColor,

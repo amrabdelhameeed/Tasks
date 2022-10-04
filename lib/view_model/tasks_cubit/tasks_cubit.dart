@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import '../../core/notification_helper.dart';
+import '../../model/notes_provider.dart';
 import '../../core/models/filter_model.dart';
 import '../../model/task.dart';
 import 'tasks_state.dart';
@@ -15,13 +17,13 @@ class TasksCubit extends Cubit<TasksState> {
   final TextEditingController timeStartController = TextEditingController();
   final TextEditingController timeEndController = TextEditingController();
   DateTime currentDate = DateTime.now();
-  String currentFilter = FilterModel.filters.first.filterName;
+  int currentFilter = FilterModel.filters.first.index;
   void selectFilter(FilterModel filterModel, List<FilterModel> filters) {
     for (var filter in filters) {
       filter.unSelectFilter();
     }
     filterModel.selectFilter();
-    currentFilter = filterModel.filterName;
+    currentFilter = filterModel.index;
     emit(TasksFilterSelectedState());
   }
 
@@ -43,17 +45,47 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   void changeDate({required DateTime currentDate}) {
-    this.currentDate = currentDate;
-    emit(DateTimeLineChangedState());
+    if (currentDate != this.currentDate) {
+      this.currentDate = currentDate;
+      emit(DateTimeLineChangedState());
+    }
+  }
+
+  void _convertDate(Task task) {
+    TimeOfDay _convertTimeto24HoursMode(String timeOfDay) {
+      final time = DateFormat('hh:mm a').parse(timeOfDay);
+      return TimeOfDay(hour: int.parse(time.toString().substring(11, 13)), minute: int.parse(time.toString().substring(14, 16)));
+    }
+
+    var date = dateFormat.parse(task.date);
+    final now = DateTime.now();
+    final time = _convertTimeto24HoursMode(task.startTime);
+    date = DateTime(
+      now.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+    );
+    task.date = date.toString();
+  }
+
+  void deleteTask(Task task) {
+    TasksProvider.deleteTask(task);
+    NotificationHelper.deleteNotification(id: int.parse(DateTime.parse(task.date).millisecondsSinceEpoch.toString().substring(4)));
+    emit(TaskDeletedState());
   }
 
   void addtask(Task task) {
-    Task.tasks.insert(0, task);
+    _convertDate(task);
+    TasksProvider.addTask(task);
     taskNameController.clear();
     dateController.clear();
     timeStartController.clear();
     timeEndController.clear();
     taskDescriptionController.clear();
+    currentFilter = 0;
+    NotificationHelper.sheduleNotification(title: 'title', body: ' body', dateTime: DateTime.parse(task.date));
     emit(TaskAddedState());
   }
 }

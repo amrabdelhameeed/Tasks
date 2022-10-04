@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../../../utils/size_config.dart';
 import 'date_widget.dart';
 import 'extra/color.dart';
 import 'extra/style.dart';
@@ -82,13 +83,13 @@ class DatePicker extends StatefulWidget {
             "provide both activated and deactivated dates List at the same time.");
 
   @override
-  State<StatefulWidget> createState() => new _DatePickerState();
+  State<StatefulWidget> createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
   DateTime? _currentDate;
 
-  ScrollController _controller = ScrollController();
+  final ScrollController _controller = ScrollController(initialScrollOffset: SizeConfig.screenWidth! * 2.92);
 
   late final TextStyle selectedDateStyle;
   late final TextStyle selectedMonthStyle;
@@ -116,7 +117,6 @@ class _DatePickerState extends State<DatePicker> {
     this.deactivatedDateStyle = widget.dateTextStyle.copyWith(color: widget.deactivatedColor);
     this.deactivatedMonthStyle = widget.monthTextStyle.copyWith(color: widget.deactivatedColor);
     this.deactivatedDayStyle = widget.dayTextStyle.copyWith(color: AppColors.mainColor);
-
     super.initState();
   }
 

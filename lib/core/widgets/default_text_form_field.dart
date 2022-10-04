@@ -1,5 +1,6 @@
-import '/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '/core/constants/app_colors.dart';
 
 // ignore: must_be_immutable
 class DefaultTextFormField extends StatefulWidget {
@@ -56,9 +57,7 @@ class _DefaultTextFormFieldState extends State<DefaultTextFormField> {
                 onPressed: () {
                   setState(() {
                     isPass = !isPass;
-                    suffix = isPass == false
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined;
+                    suffix = isPass == false ? Icons.visibility_outlined : Icons.visibility_off_outlined;
                   });
                 },
                 child: Icon(suffix),

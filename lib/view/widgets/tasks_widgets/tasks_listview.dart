@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../model/notes_provider.dart';
+import '../../../view_model/tasks_cubit/tasks_cubit.dart';
 import '../../../model/task.dart';
 import 'task_item.dart';
 
@@ -14,8 +16,14 @@ class TasksListView extends StatelessWidget {
       shrinkWrap: true,
       itemCount: tasks.length,
       itemBuilder: (context, index) {
-        return TaskItem(
-          task: tasks[index],
+        return Dismissible(
+          key: Key(tasks[index].date),
+          onDismissed: (direction) {
+            TasksCubit.get(context).deleteTask(tasks[index]);
+          },
+          child: TaskItem(
+            task: tasks[index],
+          ),
         );
       },
     );

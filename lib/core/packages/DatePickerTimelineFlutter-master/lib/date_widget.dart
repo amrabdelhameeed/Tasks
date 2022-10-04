@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'gestures/tap.dart';
+
 import '../../../utils/size_config.dart';
+import 'gestures/tap.dart';
 
 class DateWidget extends StatelessWidget {
   final double? width;

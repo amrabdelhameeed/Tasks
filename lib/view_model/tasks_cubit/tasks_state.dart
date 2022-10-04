@@ -9,6 +9,8 @@ class TasksChangedState extends TasksState {}
 
 class TaskAddedState extends TasksState {}
 
+class TaskDeletedState extends TasksState {}
+
 class TasksFilterSelectedState extends TasksState {}
 
 class DateTimeLineChangedState extends TasksState {}
